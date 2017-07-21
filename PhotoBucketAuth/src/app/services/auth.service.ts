@@ -13,7 +13,36 @@ export class AuthService {
   public displayNameStream: Observable<string>;
   public _currentUserUid: string;
 
-  constructor(private afAuth: AngularFireAuth) { }
+  constructor(private afAuth: AngularFireAuth,
+    private router: Router) {
+    this.afAuth.authState.subscribe((user: firebase.User) => {
+      if (user) {
+        console.log("User is signed in as ", user);
+        this._currentUserUid = user.uid;
+      } else {
+        console.log("User is not signed in");
+        this._currentUserUid = "";
+      }
+    });
+
+    this.isSignedInStream = this.afAuth.authState
+    .map<firebase.User, boolean>((user: firebase.User) => {
+      return user != null; 
+    });
+
+    this.displayNameStream = this.afAuth.authState
+    .map<firebase.User, string>((user: firebase.User) => {
+       if (user) {
+         if (user.displayName) {
+           return user.displayName;
+         } else {
+           return user.uid;
+         }
+       } else {
+         return "";
+       }
+     });
+  }
 
 
   signInWithRosefire(): void {
@@ -24,11 +53,25 @@ export class AuthService {
         return;
       }
       console.log("Rosefire is don. User: ", rfUser);
-      this.afAuth.auth.signInWithCustomToken(rfUser.token).then( (authState) => { 
+      this.afAuth.auth.signInWithCustomToken(rfUser.token).then((authState) => {
         console.log("Firebase signin is done now too. User: ", authState);
 
       });
     });
-
   }
+
+  signInWithGoogle(): void {
+     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+     .then( (result: any) => { 
+        this.router.navigate(['/']);
+        const user: firebase.User = result.user;
+        console.log("Push the user to the database", user);
+        // this.authorService.updateAuthor(user.uid, user.displayName, user.photoURL);
+      });
+   }
+
+   signOut(): void {
+     this.afAuth.auth.signOut();
+     this.router.navigate(['/signin']);
+   }
 }

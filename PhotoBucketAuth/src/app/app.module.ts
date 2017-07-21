@@ -37,6 +37,7 @@ import {
 import { SigninComponent } from './+signin/signin.component';
 import { MainComponent } from './+main/main.component';
 import { PhotodetailComponent } from './+photodetail/photodetail.component';
+import { AuthService } from "./services/auth.service";
 
 export const MaterialModules = [
   MdAutocompleteModule,
@@ -81,7 +82,9 @@ export const MaterialModules = [
     MaterialModules,
     FlexLayoutModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

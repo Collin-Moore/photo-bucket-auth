@@ -8,5 +8,5 @@ export const environment = {
     storageBucket: "moorect-photo-bucket-auth.appspot.com",
     messagingSenderId: "83881608311"
   },
-  rosefireRegistryToken: "e84153d6-b38a-4040-baa5-e0863b42bdb1"
+  rosefireRegistryToken: "c9fd883d-3749-4501-8f11-4bee8f930b0d"
 };
