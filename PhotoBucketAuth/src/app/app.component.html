@@ -1,4 +1,10 @@
 <md-toolbar color="primary">
-    <span>Test</span>
+  <span fxFlex>Photo Bucket</span>
+  <button *ngIf="authService.isSignedInStream | async" md-icon-button [mdMenuTriggerFor]="signOutMenu">
+    <md-icon>more_vert</md-icon>
+  </button>
+  <md-menu [overlapTrigger]="false" #signOutMenu="mdMenu">
+    <button md-menu-item (click)="authService.signOut()">Sign Out</button>
+  </md-menu>
 </md-toolbar>
 <router-outlet></router-outlet>

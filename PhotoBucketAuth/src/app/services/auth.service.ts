@@ -52,10 +52,9 @@ export class AuthService {
         console.error(error);
         return;
       }
-      console.log("Rosefire is don. User: ", rfUser);
+      // console.log("Rosefire is don. User: ", rfUser);
       this.afAuth.auth.signInWithCustomToken(rfUser.token).then((authState) => {
-        console.log("Firebase signin is done now too. User: ", authState);
-
+        // console.log("Firebase signin is done now too.");
       });
     });
   }
@@ -65,7 +64,7 @@ export class AuthService {
      .then( (result: any) => { 
         this.router.navigate(['/']);
         const user: firebase.User = result.user;
-        console.log("Push the user to the database", user);
+        // console.log("Push the user to the database", user);
         // this.authorService.updateAuthor(user.uid, user.displayName, user.photoURL);
       });
    }
