@@ -41,6 +41,7 @@ import { AuthService } from "./services/auth.service";
 import { AuthGuard } from "./services/auth.guard";
 import { PhotoService } from "./services/photo.service";
 import { PhotoDisplayCardComponent } from './photo-display-card/photo-display-card.component';
+import { PhotoDialogComponent } from './photo-dialog/photo-dialog.component';
 
 export const MaterialModules = [
   MdAutocompleteModule,
@@ -74,7 +75,8 @@ export const MaterialModules = [
     SigninComponent,
     MainComponent,
     PhotodetailComponent,
-    PhotoDisplayCardComponent
+    PhotoDisplayCardComponent,
+    PhotoDialogComponent
   ],
   imports: [
     BrowserModule,
