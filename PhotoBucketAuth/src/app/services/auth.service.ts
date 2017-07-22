@@ -54,6 +54,7 @@ export class AuthService {
       }
       // console.log("Rosefire is don. User: ", rfUser);
       this.afAuth.auth.signInWithCustomToken(rfUser.token).then((authState) => {
+        this.router.navigate(['/']);
         // console.log("Firebase signin is done now too.");
       });
     });
