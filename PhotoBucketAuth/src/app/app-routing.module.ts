@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { SigninComponent } from "./+signin/signin.component";
 import { PhotodetailComponent } from "./+photodetail/photodetail.component";
 import { MainComponent } from "./+main/main.component";
+import { AuthGuard } from "./services/auth.guard";
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
+  { path: '', component: MainComponent, canActivate:[AuthGuard] },
   { path: 'signin', component: SigninComponent },
-  { path: 'photodetail', component: PhotodetailComponent },
+  { path: 'photo', component: PhotodetailComponent },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

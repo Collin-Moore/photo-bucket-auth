@@ -11,17 +11,17 @@ export class AuthService {
 
   public isSignedInStream: Observable<boolean>;
   public displayNameStream: Observable<string>;
-  public _currentUserUid: string;
+  public currentUserUid: string;
 
   constructor(private afAuth: AngularFireAuth,
     private router: Router) {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
         console.log("User is signed in as ", user);
-        this._currentUserUid = user.uid;
+        this.currentUserUid = user.uid;
       } else {
         console.log("User is not signed in");
-        this._currentUserUid = "";
+        this.currentUserUid = "";
       }
     });
 
