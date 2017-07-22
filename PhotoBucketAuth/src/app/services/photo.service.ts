@@ -14,31 +14,24 @@ export class PhotoService {
   readonly photosPath = "photos";
   // public photoStream: FirebaseListObservable<Photo[]>;
   public photoStream: Observable<Photo[]>;
-  public isMyPhotoTabStream: Subject<boolean>;
+  public myPhotoStream: Observable<Photo[]>;
+  // public isMyPhotoTabStream: Subject<boolean>;
 
   constructor(private db: AngularFireDatabase, private authService: AuthService) {
     // if(authService.isSignedInStream) {
     //   this.photoStream = this.db.list(this.photosPath);
     // }
-    this.isMyPhotoTabStream = new BehaviorSubject<boolean>(true);
+    // this.isMyPhotoTabStream = new BehaviorSubject<boolean>(true);
+    if (authService.isSignedInStream) {
+      this.photoStream = this.db.list(this.photosPath);
 
-    this.photoStream = this.isMyPhotoTabStream.switchMap<boolean, Photo[]>(
-      (isMyPhotos: boolean) => {
-        if (isMyPhotos) {
-          return this.db.list(this.photosPath, {
-            query: {
-              orderByChild: 'uid',
-              equalTo: this.authService.currentUserUid
-            }
-          });
-        } else {
-          return this.db.list(this.photosPath);
-        }
-      });
-  }
-
-  showOnlyMyPhotos(isMyPhotosTab: boolean): void {
-    console.log("showOnlyMyPhotosTab");
-    this.isMyPhotoTabStream.next(isMyPhotosTab);
+      this.myPhotoStream =
+        this.db.list(this.photosPath, {
+          query: {
+            orderByChild: 'uid',
+            equalTo: this.authService.currentUserUid
+          }
+        });
+    }
   }
 }

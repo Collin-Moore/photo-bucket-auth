@@ -8,7 +8,7 @@
   </md-tab>
   <md-tab label="Tab 2">
     <md-grid-list [cols]="numColumns" gutterSize="15px" rowHeight="300px">
-      <md-grid-tile *ngFor="let photo of photoService.photoStream | async">
+      <md-grid-tile *ngFor="let photo of photoService.myPhotoStream | async">
         <app-photo-display-card fxFlex [photo]=photo></app-photo-display-card>
       </md-grid-tile>
     </md-grid-list>
