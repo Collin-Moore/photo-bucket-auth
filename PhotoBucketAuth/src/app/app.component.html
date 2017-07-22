@@ -1,5 +1,6 @@
 <md-toolbar color="primary">
   <span fxFlex>Photo Bucket</span>
+   <span>{{authService.displayNameStream | async}}</span>
   <button *ngIf="authService.isSignedInStream | async" md-icon-button [mdMenuTriggerFor]="signOutMenu">
     <md-icon>more_vert</md-icon>
   </button>
