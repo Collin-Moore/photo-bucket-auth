@@ -1,8 +1,9 @@
 <div fxLayoutAlign="center center">
 <md-card fxLayout="column" fxLayoutAlign="none center">
     <md-card-title >You must be signed in</md-card-title>
-    <md-card-content>
-        <button (click)="authService.signInWithRosefire()" class="rosefire-btn" md-raised-button>Rose-Hulman Login</button>
+    <md-card-content fxLayout="column" fxLayoutAlign="none center">
+        <button id="google-button" md-button (click)="authService.signInWithGoogle()"></button>
+        <button id="rosefire-btn" md-raised-button (click)="authService.signInWithRosefire()">Rose-Hulman Login</button>
     </md-card-content>
 </md-card>
 </div>
