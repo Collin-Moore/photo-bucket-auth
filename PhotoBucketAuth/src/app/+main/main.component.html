@@ -1,10 +1,8 @@
 <md-tab-group fxFlex>
   <md-tab label="Tab 1">
-    <md-grid-list [cols]="numColumns" gutterSize="10px" rowHeight="200px">
+    <md-grid-list [cols]="numColumns" gutterSize="10px" rowHeight="266px">
       <md-grid-tile *ngFor="let photo of photoService.photoStream | async">
-        <md-card>
-          <img [src]="photo.imageUrl" alt="photo.caption">
-        </md-card>
+        <app-photo-display-card fxFlex [photo]=photo></app-photo-display-card>
       </md-grid-tile>
     </md-grid-list>
   </md-tab>
