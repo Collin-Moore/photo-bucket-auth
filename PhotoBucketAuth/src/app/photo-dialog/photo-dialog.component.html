@@ -1,15 +1,16 @@
 <h1 md-dialog-title>{{title}}</h1>
-<form #photoForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit()">
-  <md-dialog-content fxFlex="100" fxLayout="column" fxLayoutAlign="none center">
-    <md-input-container>
-      <input mdInput type="text" required placeHolder="Add an existing photo URL" name="imageUrl" [(ngModel)]="formPhoto.imageUrl">
+<form #photoForm="ngForm" fxLayout="column" fxLayoutAlign="none stretch" (ngSubmit)="onSubmit()">
+  <md-dialog-content fxLayout="column" fxLayoutAlign="none stretch">
+    <md-input-container fxFlex>
+      <input mdInput type="text" required placeholder="Add an existing photo URL" name="imageUrl" [(ngModel)]="formPhoto.imageUrl">
     </md-input-container>
-    <div>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <span fxFlex></span>
       <span>or</span>
       <button md-raised-button type="button">Upload an image</button>
     </div>
-    <md-input-container>
-      <input mdInput type="text" required placeHolder="Caption" name="caption" [(ngModel)]="formPhoto.caption">
+    <md-input-container fxFlex>
+      <input mdInput type="text" required placeholder="Caption" name="caption" [(ngModel)]="formPhoto.caption">
     </md-input-container>
   </md-dialog-content>
 
@@ -18,3 +19,4 @@
     <button md-button type="button" [disabled]="!photoForm.form.valid">Save</button>
   </md-dialog-actions>
 </form>
+
