@@ -1,12 +1,12 @@
 <md-tab-group>
-  <md-tab label="Tab 1">
+  <md-tab label="All Photos">
     <md-grid-list [cols]="numColumns" gutterSize="15px" rowHeight="300px">
       <md-grid-tile *ngFor="let photo of photoService.photoStream | async">
         <app-photo-display-card fxFlex [photo]=photo></app-photo-display-card>
       </md-grid-tile>
     </md-grid-list>
   </md-tab>
-  <md-tab label="Tab 2">
+  <md-tab label="My Photos">
     <md-grid-list [cols]="numColumns" gutterSize="15px" rowHeight="300px">
       <md-grid-tile *ngFor="let photo of photoService.myPhotoStream | async">
         <app-photo-display-card fxFlex [photo]=photo></app-photo-display-card>

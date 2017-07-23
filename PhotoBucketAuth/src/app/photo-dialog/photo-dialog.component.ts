@@ -2,9 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MdDialogRef, MD_DIALOG_DATA } from "@angular/material";
 import { Photo } from "../models/photo";
 import * as firebase from 'firebase/app';
+import { AuthService } from "../services/auth.service";
 
 interface PhotoDialogData {
-  firebasePath: string;
+  // firebasePath: string;
   photo?: Photo;
 }
 
@@ -19,8 +20,10 @@ export class PhotoDialogComponent implements OnInit {
   formPhoto: Photo;
 
   constructor(private dialogRef: MdDialogRef<PhotoDialogComponent>,
+    private authService: AuthService,
   @Inject(MD_DIALOG_DATA) private dialogData: PhotoDialogData) {
     this.formPhoto = new Photo();
+    this.formPhoto.uid = authService.currentUserUid;
    }
 
   ngOnInit() {
@@ -32,7 +35,7 @@ export class PhotoDialogComponent implements OnInit {
 
   onSubmit() {
     try {
-      const firebaseRef = firebase.database().ref(this.dialogData.firebasePath);
+      const firebaseRef = firebase.database().ref('photos');
       if (this.dialogData.photo) {
         firebaseRef.child(this.dialogData.photo.$key).set(this.formPhoto);
       } else {
