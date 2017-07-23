@@ -1,0 +1,21 @@
+[md-dialog-title] {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #444;
+    padding: 0 70px;
+    text-align: center;
+}
+
+.mat-input-container {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    text-align: left;
+}
+
+[md-dialog-content] {
+    max-width: 1000px;
+}
+
+#upload-btn {
+    margin-left: 10px; 
+}
