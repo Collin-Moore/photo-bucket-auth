@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../services/auth.service";
 import { PhotoService } from "../services/photo.service";
+import { MdDialog, MdDialogConfig } from "@angular/material";
+import { PhotoDialogComponent } from "../photo-dialog/photo-dialog.component";
 
 @Component({
   selector: 'app-main',
@@ -9,7 +11,9 @@ import { PhotoService } from "../services/photo.service";
 })
 export class MainComponent implements OnInit {
 
-  constructor(public photoService: PhotoService, public authService: AuthService) { }
+  public firebasePath: string;
+
+  constructor(public photoService: PhotoService, public authService: AuthService, private dialog: MdDialog) { }
 
   ngOnInit() {
   }
@@ -24,5 +28,12 @@ export class MainComponent implements OnInit {
     } else {
       return 4;
     }
+  }
+
+  showPasswordDialog(): void {
+    const dialogConfig = new MdDialogConfig();
+    dialogConfig.data = {firebasePath: this.firebasePath};
+    this.dialog.open(PhotoDialogComponent, dialogConfig);
+    
   }
 }

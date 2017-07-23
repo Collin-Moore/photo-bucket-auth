@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -78,6 +79,9 @@ export const MaterialModules = [
     PhotoDisplayCardComponent,
     PhotoDialogComponent
   ],
+  entryComponents: [
+    PhotoDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -87,6 +91,7 @@ export const MaterialModules = [
     BrowserAnimationsModule,
     MaterialModules,
     FlexLayoutModule,
+    FormsModule,
   ],
   providers: [
     AuthService,
