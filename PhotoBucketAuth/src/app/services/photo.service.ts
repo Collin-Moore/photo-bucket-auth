@@ -6,22 +6,21 @@ import { Photo } from "../models/photo";
 import { Subject } from "rxjs/Subject";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import 'rxjs/add/operator/switchMap';
+import { ActivatedRoute, Params } from "@angular/router";
 
 
 @Injectable()
 export class PhotoService {
 
   readonly photosPath = "photos";
-  // public photoStream: FirebaseListObservable<Photo[]>;
+  readonly defaultPhoto = new Photo();
+
   public photoStream: Observable<Photo[]>;
   public myPhotoStream: Observable<Photo[]>;
-  // public isMyPhotoTabStream: Subject<boolean>;
+  public detailedPhotoStream: BehaviorSubject<Photo>;
 
-  constructor(private db: AngularFireDatabase, private authService: AuthService) {
-    // if(authService.isSignedInStream) {
-    //   this.photoStream = this.db.list(this.photosPath);
-    // }
-    // this.isMyPhotoTabStream = new BehaviorSubject<boolean>(true);
+
+  constructor(private db: AngularFireDatabase, private authService: AuthService, private route: ActivatedRoute) {
     if (authService.isSignedInStream) {
       this.photoStream = this.db.list(this.photosPath);
 
@@ -32,6 +31,17 @@ export class PhotoService {
             equalTo: this.authService.currentUserUid
           }
         });
+      
+      this.detailedPhotoStream = new BehaviorSubject<Photo>(this.defaultPhoto);
     }
+  }
+
+  setDetailedPhoto(photo: Photo): void {
+    this.detailedPhotoStream.next(photo);
+    console.log(this.detailedPhotoStream);
+  }
+
+  getLatestDetailedPhoto(): Photo {
+    return this.detailedPhotoStream.getValue();
   }
 }

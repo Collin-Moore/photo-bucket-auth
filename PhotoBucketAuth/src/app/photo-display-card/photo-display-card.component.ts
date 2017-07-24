@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Photo } from "../models/photo";
+import { Router } from "@angular/router";
+import { PhotoService } from "../services/photo.service";
 
 @Component({
   selector: 'app-photo-display-card',
@@ -8,9 +10,14 @@ import { Photo } from "../models/photo";
 })
 export class PhotoDisplayCardComponent implements OnInit {
   @Input() photo: Photo;
-  constructor() { }
+  constructor(private router: Router, private photoService: PhotoService) { }
 
   ngOnInit() {
   }
 
+  goToDetailedPage() {
+    console.log(this.photo);
+    this.photoService.setDetailedPhoto(this.photo);
+    this.router.navigate(['/photo', this.photo.$key]);
+  }
 }

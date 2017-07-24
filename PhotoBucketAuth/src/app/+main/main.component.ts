@@ -16,6 +16,7 @@ export class MainComponent implements OnInit {
   constructor(public photoService: PhotoService, public authService: AuthService, private dialog: MdDialog) { }
 
   ngOnInit() {
+    
   }
 
   get numColumns(): number {

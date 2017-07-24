@@ -1,3 +1,11 @@
-<p>
-  photodetail works!
-</p>
+<md-card>
+  <md-card-header fxLayoutAlign="center center">
+    <md-card-title>{{photo.caption}}</md-card-title>
+  </md-card-header>
+  <md-card-content fxLayoutAlign="center center">
+    <img [src]="photo.imageUrl" [alt]="photo.caption">
+  </md-card-content>
+  <md-card-actions>
+    <button md-button type="button">BACK</button>
+  </md-card-actions>
+</md-card>

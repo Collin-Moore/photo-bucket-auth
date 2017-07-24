@@ -3,6 +3,8 @@
     <md-card-title>{{photo.caption}}</md-card-title>
   </md-card-header>
   <md-card-content fxLayoutAlign="center center">
+    <a (click)="goToDetailedPage()">
     <img [src]="photo.imageUrl" [alt]="photo.caption">
+    </a>
   </md-card-content>
 </md-card>
