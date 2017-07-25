@@ -1,8 +1,7 @@
-img {
+img[md-card-image] {
+    margin: 0;
     height: 190px;
+    width: auto;
+    cursor: pointer;
 }
 
-md-card-actions, md-card-content{
-    padding: 0;
-    margin: 0;
-}
