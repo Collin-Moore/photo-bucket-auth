@@ -1,11 +1,11 @@
 <md-card>
   <md-card-header fxLayoutAlign="center center">
-    <md-card-title>{{photo.caption}}</md-card-title>
+    <md-card-title *ngIf="(detailedPhotoStream | async) !== null">{{(detailedPhotoStream | async).caption}}</md-card-title>
   </md-card-header>
   <md-card-content fxLayoutAlign="center center">
-    <img [src]="photo.imageUrl" [alt]="photo.caption">
+    <img *ngIf="(detailedPhotoStream | async) !== null"[src]="(detailedPhotoStream | async).imageUrl" [alt]="(detailedPhotoStream | async).caption">
   </md-card-content>
   <md-card-actions>
-    <button md-button type="button">BACK</button>
+    <button (click)="backToMain()" md-button type="button">BACK</button>
   </md-card-actions>
 </md-card>

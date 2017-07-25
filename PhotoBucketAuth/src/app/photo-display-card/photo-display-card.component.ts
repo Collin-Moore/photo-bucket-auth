@@ -16,8 +16,6 @@ export class PhotoDisplayCardComponent implements OnInit {
   }
 
   goToDetailedPage() {
-    console.log(this.photo);
-    this.photoService.setDetailedPhoto(this.photo);
     this.router.navigate(['/photo', this.photo.$key]);
   }
 }
