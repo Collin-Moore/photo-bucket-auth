@@ -5,25 +5,35 @@ import { environment } from "../../environments/environment";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import 'rosefire';
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class AuthService {
 
   public isSignedInStream: Observable<boolean>;
   public displayNameStream: Observable<string>;
-  public currentUserUid: string;
+  public currentUserUidStream: Observable<string>;
 
   constructor(private afAuth: AngularFireAuth,
     private router: Router) {
-    this.afAuth.authState.subscribe((user: firebase.User) => {
-      if (user) {
-        console.log("User is signed in as ", user);
-        this.currentUserUid = user.uid;
-      } else {
-        console.log("User is not signed in");
-        this.currentUserUid = "";
-      }
-    });
+      this.currentUserUidStream = this.afAuth.authState.map<firebase.User, string>((user: firebase.User) => {
+        if (user) {
+          console.log("User is signed in as ", user);
+          return user.uid;
+        } else {
+          console.log("User is not signed in");
+          return "";
+        }
+      });
+    // this.afAuth.authState.subscribe((user: firebase.User) => {
+    //   if (user) {
+    //     console.log("User is signed in as ", user);
+    //     this.currentUserUid = user.uid;
+    //   } else {
+    //     console.log("User is not signed in");
+    //     this.currentUserUid = "";
+    //   }
+    // });
 
     this.isSignedInStream = this.afAuth.authState
     .map<firebase.User, boolean>((user: firebase.User) => {

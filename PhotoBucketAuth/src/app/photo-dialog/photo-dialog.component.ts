@@ -23,7 +23,10 @@ export class PhotoDialogComponent implements OnInit {
     private authService: AuthService,
   @Inject(MD_DIALOG_DATA) private dialogData: PhotoDialogData) {
     this.formPhoto = new Photo();
-    this.formPhoto.uid = authService.currentUserUid;
+    // this.formPhoto.uid = authService.currentUserUid;
+    this.authService.currentUserUidStream.subscribe((currentUid: string) => {
+      this.formPhoto.uid = currentUid;
+     });
    }
 
   ngOnInit() {

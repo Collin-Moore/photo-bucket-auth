@@ -3,10 +3,7 @@ import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/databa
 import { AuthService } from "./auth.service";
 import { Observable } from "rxjs/Observable";
 import { Photo } from "../models/photo";
-import { Subject } from "rxjs/Subject";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import 'rxjs/add/operator/switchMap';
-import { ActivatedRoute, Params } from "@angular/router";
+import 'rxjs/add/observable/combineLatest';
 
 
 @Injectable()
@@ -19,17 +16,25 @@ export class PhotoService {
   public myPhotoStream: Observable<Photo[]>;
 
 
-  constructor(private db: AngularFireDatabase, private authService: AuthService, private route: ActivatedRoute) {
+  constructor(private db: AngularFireDatabase, private authService: AuthService) {
     if (authService.isSignedInStream) {
       this.photoStream = this.db.list(this.photosPath);
 
-      this.myPhotoStream =
-        this.db.list(this.photosPath, {
+      // this.myPhotoStream = 
+      //   this.db.list(this.photosPath, {
+      //     query: {
+      //       orderByChild: 'uid',
+      //       equalTo: this.authService.currentUserUid
+      //     }
+      //   });
+      this.authService.currentUserUidStream.subscribe((currentUid: string) => {
+        this.myPhotoStream = this.db.list(this.photosPath, {
           query: {
             orderByChild: 'uid',
-            equalTo: this.authService.currentUserUid
+            equalTo: currentUid
           }
         });
+      });
       
     }
   }

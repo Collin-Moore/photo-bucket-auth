@@ -20,7 +20,6 @@ export class PhotodetailComponent implements OnInit {
       const photoKey = routeParams['photoKey'];
       this.detailedPhotoStream = this.photoService.photoStream.map<Photo[], Photo>((photos: Photo[]) => {
           const index = photos.findIndex((photo: Photo) => photo.$key === photoKey);
-          console.log(photos[index]);
           return photos[index];
        });
     });
