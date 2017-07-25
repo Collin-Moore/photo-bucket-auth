@@ -15,9 +15,7 @@ import 'rxjs/add/operator/mergeMap';
 export class PhotodetailComponent implements OnInit {
   public detailedPhotoStream: Observable<Photo>;
   constructor(private route: ActivatedRoute, public photoService: PhotoService, private navRoute: Router) {
-    //  this.detailedPhotoStream = Observable.combineLatest<Params, Photo[]>(this.route.params, this.photoService.photoStream, (routeParams: Params, photos: Photo[]) => {
-    //    let photoKey = routeParams["photoKey"];
-    //  });
+
     this.route.params.subscribe((routeParams: Params) => {
       const photoKey = routeParams['photoKey'];
       this.detailedPhotoStream = this.photoService.photoStream.map<Photo[], Photo>((photos: Photo[]) => {
@@ -29,12 +27,11 @@ export class PhotodetailComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    // this.photosArray.unsubscribe();
+
   }
 
   ngOnInit() {
-    // this.photo = this.photoService.getLatestDetailedPhoto();
-   console.log("halp");
+
   }
 
   backToMain(): void {

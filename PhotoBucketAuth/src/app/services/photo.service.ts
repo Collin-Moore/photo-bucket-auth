@@ -17,7 +17,6 @@ export class PhotoService {
 
   public photoStream: Observable<Photo[]>;
   public myPhotoStream: Observable<Photo[]>;
-  public detailedPhotoStream: BehaviorSubject<Photo>;
 
 
   constructor(private db: AngularFireDatabase, private authService: AuthService, private route: ActivatedRoute) {
@@ -32,16 +31,6 @@ export class PhotoService {
           }
         });
       
-      this.detailedPhotoStream = new BehaviorSubject<Photo>(this.defaultPhoto);
     }
-  }
-
-  setDetailedPhoto(photo: Photo): void {
-    this.detailedPhotoStream.next(photo);
-    console.log(this.detailedPhotoStream);
-  }
-
-  getLatestDetailedPhoto(): Photo {
-    return this.detailedPhotoStream.getValue();
   }
 }
