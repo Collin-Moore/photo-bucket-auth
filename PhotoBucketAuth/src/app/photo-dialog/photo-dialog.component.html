@@ -7,7 +7,8 @@
     <div fxLayout="row" fxLayoutAlign="end center">
       <span fxFlex.gt-xs="225px"></span>
       or
-      <button md-raised-button id="upload-btn" type="button">Upload an image</button>
+      <button md-raised-button color="accent" (click)="photoInput.click()" id="upload-btn" type="button">Upload an image</button>
+      <input #photoInput style="display: none;" type="file" (change)="uploadPhotoSelected($event)">
     </div>
     <md-input-container>
       <input mdInput type="text" placeholder="Caption" name="caption" [(ngModel)]="formPhoto.caption">

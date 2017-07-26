@@ -35,7 +35,7 @@ export class PhotodetailComponent implements OnInit {
         } else {
           return false;
         }
-       })
+       });
 
        this.detailedPhotoStream.subscribe((photoForEditRemove: Photo) => {
          this.photo = photoForEditRemove; 
