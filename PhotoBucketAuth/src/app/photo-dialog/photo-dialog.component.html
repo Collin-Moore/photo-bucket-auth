@@ -4,11 +4,16 @@
     <md-input-container>
       <input mdInput type="text" required placeholder="Add an existing photo URL" name="imageUrl" [(ngModel)]="formPhoto.imageUrl">
     </md-input-container>
-    <div fxLayout="row" fxLayoutAlign="end center">
-      <span fxFlex.gt-xs="225px"></span>
-      or
-      <button md-raised-button color="accent" (click)="photoInput.click()" id="upload-btn" type="button">Upload an image</button>
-      <input #photoInput style="display: none;" type="file" (change)="uploadPhotoSelected($event)">
+    <div [ngSwitch]="loading">
+      <div *ngSwitchCase="true" fxLayout="row" fxLayoutAlign="end center">
+        <md-spinner></md-spinner>
+      </div>
+      <div *ngSwitchDefault fxLayout="row" fxLayoutAlign="end center">
+        <span fxFlex.gt-xs="225px"></span>
+        or
+        <button md-raised-button color="accent" (click)="photoInput.click()" id="upload-btn" type="button">Upload an image</button>
+        <input #photoInput style="display: none;" type="file" (change)="uploadPhotoSelected($event)">
+      </div>
     </div>
     <md-input-container>
       <input mdInput type="text" placeholder="Caption" name="caption" [(ngModel)]="formPhoto.caption">
