@@ -35,6 +35,5 @@ export class MainComponent implements OnInit {
     const dialogConfig = new MdDialogConfig();
     dialogConfig.data = {firebasePath: this.firebasePath};
     this.dialog.open(PhotoDialogComponent, dialogConfig);
-    
   }
 }
